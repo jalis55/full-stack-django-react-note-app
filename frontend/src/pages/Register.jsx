@@ -1,10 +1,9 @@
 import React from 'react'
-import { Form } from 'react-router-dom'
+import Form from '../components/Form';
+
 
 const Register = () => {
-  return (
-     <Form route="/api/user/register/" method='register' />
-  )
+  return  <Form route="/api/token/" method="register" />
 }
 
 export default Register;

@@ -7,7 +7,7 @@ import LoadingIndicator from "./LoaginIndicator";
 
 function Form({ route, method }) {
     
-
+   
     
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -16,7 +16,10 @@ function Form({ route, method }) {
 
     const name = method === "login" ? "Login" : "Register";
 
+
+
     const handleSubmit = async (e) => {
+        console.log(route,method);
         setLoading(true);
         e.preventDefault();
 
@@ -37,7 +40,7 @@ function Form({ route, method }) {
     };
 
     return (
-        <form  className="form-container">
+        <form  className="form-container" onSubmit={(e)=>handleSubmit(e)}>
             <h1>{name}</h1>
             <input
                 className="form-input"

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import api from "../api";
 import { useNavigate } from "react-router-dom";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
+import { ACCESS_TOKEN, REFRESH_TOKEN ,USER_NAME} from "../constants";
 import "../styles/Form.css"
 import LoadingIndicator from "./LoaginIndicator";
 
@@ -24,12 +24,16 @@ function Form({ route, method }) {
         e.preventDefault();
 
         try {
-            const res = await api.post(route, { username, password })
+            const res = await api.post(route, { username, password });
+            
             if (method === "login") {
+               
                 localStorage.setItem(ACCESS_TOKEN, res.data.access);
                 localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
+                localStorage.setItem(USER_NAME,username);
                 navigate("/")
             } else {
+                localStorage.clear();
                 navigate("/login")
             }
         } catch (error) {

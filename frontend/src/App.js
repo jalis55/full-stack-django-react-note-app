@@ -11,6 +11,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 const Logout = () => {
   localStorage.clear();
+  // alert('Logged out successfully!');
   return <Navigate to="/login" />;
 };
 

@@ -14,10 +14,8 @@ const useCheckAuthorized = () => {
 
                 const decoded = jwtDecode(token);
                 const tokenExpiration = decoded.exp;
-                console.log(tokenExpiration)
                 const now = Date.now() / 1000;
-                console.log(now)
-
+               
                 if (tokenExpiration < now) {
                     await handleTokenRefresh();
                 } else {

@@ -3,6 +3,7 @@ import api from "../api";
 import Note from "../components/Note";
 import "../styles/Home.css"
 import Navbar from "../components/Navbar";
+import NoteModal from "../components/NoteModal";
 
 function Home() {
     const [notes, setNotes] = useState([]);
@@ -35,8 +36,8 @@ function Home() {
             .catch((error) => alert(error));
     };
 
-    const createNote = (e) => {
-        e.preventDefault();
+    const createNote = (title,content) => {
+
         api
             .post("/api/notes/", { content, title })
             .then((res) => {
@@ -50,36 +51,16 @@ function Home() {
     return (
         <div>
           <Navbar/>
+          <NoteModal createNote={createNote} taskName="Add note"/>
             <div>
                 <h2>Notes</h2>
                 {notes.map((note) => (
                     <Note note={note} onDelete={deleteNote} key={note.id} />
                 ))}
             </div>
-            <h2>Create a Note</h2>
-            <form onSubmit={createNote}>
-                <label htmlFor="title">Title:</label>
-                <br />
-                <input
-                    type="text"
-                    id="title"
-                    name="title"
-                    required
-                    onChange={(e) => setTitle(e.target.value)}
-                    value={title}
-                />
-                <label htmlFor="content">Content:</label>
-                <br />
-                <textarea
-                    id="content"
-                    name="content"
-                    required
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                ></textarea>
-                <br />
-                <input type="submit" value="Submit"></input>
-            </form>
+            
+
+            
         </div>
     );
 }
